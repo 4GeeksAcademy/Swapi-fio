@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			favorites: [], //MIS FAV
 			demo: [
 				{
 					title: "FIRST",
@@ -15,27 +16,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
+			
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			addFavorite: (uid) => {
+				const currentFavorites = getStore().favorites;
+				if (!currentFavorites.includes(uid)) { 
+				  setStore({ favorites: [...currentFavorites, uid] });
+				}
 			},
+		
+			
+			removeFavorite: (uid) => {
+				setStore({
+				  favorites: getStore().favorites.filter(fav => fav !== uid),
+				});
+			},
+			
+			
 			changeColor: (index, color) => {
-				//get the store
+			
 				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
+				// Loop through the demo array to find the item at the specified index
+				// and change its background color
 				const demo = store.demo.map((elm, i) => {
 					if (i === index) elm.background = color;
 					return elm;
 				});
 
-				//reset the global store
+				// Update the store with the new demo array
 				setStore({ demo: demo });
 			}
 		}
