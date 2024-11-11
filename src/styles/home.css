@@ -1,19 +1,19 @@
-/* Aplica la imagen de fondo al body */
+
 body {
-    background-image: url('https://png.pngtree.com/background/20230528/original/pngtree-the-star-wars-death-star-is-shown-in-black-picture-image_2781985.jpg');
+    background-image: url('https://wallpapers.com/images/featured/star-wars-aesthetic-6tg0d4fvyanbdeb2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Fija el fondo al hacer scroll */
+    background-attachment: fixed; 
     background-position: center;
-    color: white; /* Mejora la legibilidad del texto en el fondo */
-    margin: 0; /* Asegúrate de que no haya margen en el body */
+    color: white; 
+    margin: 0; 
   }
-  
-  /* Estilo transparente para el Navbar */
+
   .navbar {
-    background-color: transparent; /* Fondo completamente transparente */
-    color: white; /* Color de texto blanco para que sea legible sobre el fondo */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra opcional para mejor contraste */
+    background-color: transparent; 
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
   }
   
   

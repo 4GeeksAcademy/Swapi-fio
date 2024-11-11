@@ -10,16 +10,12 @@ export const Navbar = () => {
     <nav className="navbar">
 		
       <Link to="/">
-        <button className="btn ">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt6tXpgC4PkasXmp9WPVOJoqe-n7vR-7BpPw&s"
-            alt="Star Wars Logo"
-            style={{ width: "150px", height: "auto" }}
-          />
+        <button className="btn m-3">
+        <h1 className="logo"style={{"font-family": 'Star Wars', "color":"#FF1493", "textShadow": "1px 1px 0 #fff"}}>STAR WARS</h1>                   
         </button>
       </Link>
       <div className="btn-group m-3">
-        <button type="button" className="btn btn-warning" aria-label="Favorites">
+        <button type="button" className="btn" style={{"backgroundColor": "#FF1493", "color":"white", "boxShadow": "1px 1px 0 #fff"}} aria-label="Favorites">
           <i className="fa-solid fa-heart"></i> {favoriteCount}
         </button>
       </div>
