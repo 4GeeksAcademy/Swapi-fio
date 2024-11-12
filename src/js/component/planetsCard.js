@@ -4,19 +4,20 @@ import { useNavigate } from "react-router-dom";
 
 export const PlanetsCard = (props) => {
   const { actions, store } = useContext(Context);
-  const navigate = useNavigate(); // Para ir a las historias
+  const navigate = useNavigate();
 
-  // Verifico si hay fav
-  const isFavorite = store.favorites.includes(props.uid);
 
-  // Agrego y saco fav
+  const isFavorite = store.favorites.some(fav => fav.uid === props.uid);
+
+  // agrego o saco favs
   const activeFavorite = () => {
     if (isFavorite) {
       actions.removeFavorite(props.uid);
     } else {
-      actions.addFavorite(props.uid);
+      actions.addFavorite({ uid: props.uid, name: props.name });
     }
   };
+
 
   const goToDetails = () => {
     navigate(`/planets/${props.uid}`);
@@ -38,6 +39,12 @@ export const PlanetsCard = (props) => {
       />
       <div className="card-body">
         <h5 className="card-title">{props.name}</h5>
+        <p className="card-text">
+                  <strong>Climate:</strong> {props.climate}
+                </p>
+                <p className="card-text">
+                  <strong>Diameter:</strong> {props.diameter}
+                </p>
         <div className="d-flex justify-content-between">
           <button
             onClick={goToDetails}

@@ -19,18 +19,20 @@ const getState = ({ getStore, getActions, setStore }) => {
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
-      addFavorite: (uid) => {
-        const currentFavorites = getStore().favorites;
-        if (!currentFavorites.includes(uid)) {
-          setStore({ favorites: [...currentFavorites, uid] });
+      addFavorite: (item) => {
+        const store = getStore();
+        if (!store.favorites.find(fav => fav.name === item.name)) { 
+          setStore({ favorites: [...store.favorites, item] });
         }
+      
       },
 
-      removeFavorite: (uid) => {
-        setStore({
-          favorites: getStore().favorites.filter((fav) => fav !== uid),
-        });
+      removeFavorite: (uid) => { 
+        const store = getStore();
+        const updatedFavorites = store.favorites.filter(fav => fav.uid !== uid); 
+        setStore({ favorites: updatedFavorites });
       },
+      
 
       changeColor: (index, color) => {
         const store = getStore();

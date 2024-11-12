@@ -6,17 +6,18 @@ export const VehiclesCard = (props) => {
   const { actions, store } = useContext(Context);
   const navigate = useNavigate();
 
-  // Verifico si hay fav
-  const isFavorite = store.favorites.includes(props.uid);
 
-  // Agrego o quito fav
+  const isFavorite = store.favorites.some(fav => fav.uid === props.uid);
+
+  // agrego o saco favs
   const activeFavorite = () => {
     if (isFavorite) {
       actions.removeFavorite(props.uid);
     } else {
-      actions.addFavorite(props.uid);
+      actions.addFavorite({ uid: props.uid, name: props.name });
     }
   };
+
 
   const goToDetails = () => {
     navigate(`/vehicles/${props.uid}`); 
@@ -37,7 +38,13 @@ export const VehiclesCard = (props) => {
         alt="..."
       />
       <div className="card-body">
-        <h5 className="card-title">{props.name}</h5>
+        <h5 className="card-title ">{props.name}</h5>
+        <p className="card-text">
+                  <strong>Model:</strong> {props.model}
+                </p>
+                <p className="card-text">
+                  <strong>Passengers:</strong> {props.passengers}
+                </p>
         <div className="d-flex justify-content-between">
           <button
             onClick={goToDetails}

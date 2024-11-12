@@ -14,7 +14,16 @@ export const Home = () => {
       try {
         const res = await fetch("https://www.swapi.tech/api/people");
         const data = await res.json();
-        setCharacters(data.results);
+
+        const detailedCharacters = await Promise.all(
+          data.results.map(async (item) => {
+            const res = await fetch(item.url);
+            const details = await res.json();
+            return { ...details.result.properties, uid: item.uid };
+          })
+        );
+
+        setCharacters(detailedCharacters);
       } catch (err) {
         console.error(err);
       }
@@ -27,7 +36,16 @@ export const Home = () => {
       try {
         const res = await fetch("https://www.swapi.tech/api/planets");
         const data = await res.json();
-        setPlanets(data.results);
+
+        const detailedPlanets = await Promise.all(
+          data.results.map(async (item) => {
+            const res = await fetch(item.url);
+            const details = await res.json();
+            return { ...details.result.properties, uid: item.uid };
+          })
+        );
+
+        setPlanets(detailedPlanets);
       } catch (err) {
         console.error(err);
       }
@@ -40,7 +58,21 @@ export const Home = () => {
       try {
         const res = await fetch("https://www.swapi.tech/api/vehicles");
         const data = await res.json();
-        setVehicles(data.results);
+
+        const detailedVehicles = await Promise.all(
+          data.results.map(async (item) => {
+            const res = await fetch(item.url);
+            const details = await res.json();
+            return {
+              ...details.result.properties,
+              uid: item.uid,
+              model: details.result.properties.model,
+              passengers: details.result.properties.passengers,
+            };
+          })
+        );
+
+        setVehicles(detailedVehicles);
       } catch (err) {
         console.error(err);
       }
@@ -62,25 +94,27 @@ export const Home = () => {
             <CharactersCard
               name={item.name}
               uid={item.uid}
-              style={{ width: "250px", height: "350px" }}
+              hair_color={item.hair_color}
+              eye_color={item.eye_color}
+              gender={item.gender}
             />
           </div>
         ))}
       </div>
-
       <h1
         className="title mt-2"
-        style={{ "font-family": "Star Wars", textShadow: "1px 1px 0 #fff" }}
+        style={{ fontFamily: "Star Wars", textShadow: "1px 1px 0 #fff" }}
       >
-        PLANETS <i class="fa-solid fa-globe"></i>
+        PLANETS <i className="fa-solid fa-globe"></i>
       </h1>
       <div className="d-flex flex-nowrap overflow-auto px-3">
         {planets.map((item) => (
-          <div className="mx-2" key={item.uid}>
+          <div className="mx-1" key={item.uid}>
             <PlanetsCard
               name={item.name}
               uid={item.uid}
-              style={{ width: "250px", height: "350px" }}
+              climate={item.climate}
+              diameter={item.diameter}
             />
           </div>
         ))}
@@ -88,17 +122,18 @@ export const Home = () => {
 
       <h1
         className="title mt-2"
-        style={{ "font-family": "Star Wars", textShadow: "1px 1px 0 #fff" }}
+        style={{ fontFamily: "Star Wars", textShadow: "1px 1px 0 #fff" }}
       >
-        VEHiCLES <i class="fa-solid fa-shuttle-space"></i>
+        VEHICLES <i className="fa-solid fa-shuttle-space"></i>
       </h1>
-      <div className="d-flex flex-nowrap overflow-auto px-3">
+      <div className="d-flex flex-nowrap overflow-auto px-3 m-0">
         {vehicles.map((item) => (
           <div className="mx-2" key={item.uid}>
             <VehiclesCard
               name={item.name}
               uid={item.uid}
-              style={{ width: "250px", height: "350px" }}
+              model={item.model}
+              passengers={item.passengers}
             />
           </div>
         ))}

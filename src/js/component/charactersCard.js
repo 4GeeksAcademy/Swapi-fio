@@ -6,15 +6,15 @@ export const CharactersCard = (props) => {
   const { actions, store } = useContext(Context);
   const navigate = useNavigate();
 
-  // Verifico si hay fav
-  const isFavorite = store.favorites.includes(props.uid);
 
-  // Agrego y saco fav
+  const isFavorite = store.favorites.some(fav => fav.uid === props.uid);
+
+  // agrego o saco favs
   const activeFavorite = () => {
     if (isFavorite) {
       actions.removeFavorite(props.uid);
     } else {
-      actions.addFavorite(props.uid);
+      actions.addFavorite({ uid: props.uid, name: props.name });
     }
   };
 
@@ -34,10 +34,19 @@ export const CharactersCard = (props) => {
       <img
         src={`https://starwars-visualguide.com/assets/img/characters/${props.uid}.jpg`}
         className="card-img-top"
-        alt="..."
+        alt={props.name}
       />
       <div className="card-body">
         <h5 className="card-title">{props.name}</h5>
+        <p className="card-text">
+                  <strong>Gender:</strong> {props.gender}
+                </p>
+                <p className="card-text">
+                  <strong>Hair Color:</strong> {props.hair_color}
+                </p>
+                <p className="card-text">
+                  <strong>Eye Color:</strong> {props.eye_color}
+                </p>
         <div className="d-flex justify-content-between">
           <button
             onClick={goToDetails}
@@ -52,9 +61,7 @@ export const CharactersCard = (props) => {
             style={{ backgroundColor: "#FF1493", color: "white" }}
           >
             <i
-              className={`fa-solid fa-heart ${
-                isFavorite ? "text-danger" : "text-light"
-              }`}
+              className={`fa-solid fa-heart ${isFavorite ? "text-danger" : "text-light"}`}
             />
           </button>
         </div>
