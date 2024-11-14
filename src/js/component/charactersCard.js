@@ -6,8 +6,7 @@ export const CharactersCard = (props) => {
   const { actions, store } = useContext(Context);
   const navigate = useNavigate();
 
-
-  const isFavorite = store.favorites.some(fav => fav.uid === props.uid);
+  const isFavorite = store.favorites.some((fav) => fav.uid === props.uid);
 
   // agrego o saco favs
   const activeFavorite = () => {
@@ -28,7 +27,6 @@ export const CharactersCard = (props) => {
       style={{
         width: "18rem",
         backgroundColor: "#FFD1DC",
-        boxShadow: "5px 5px 5px 5px #8A2BE2",
       }}
     >
       <img
@@ -39,14 +37,14 @@ export const CharactersCard = (props) => {
       <div className="card-body">
         <h5 className="card-title">{props.name}</h5>
         <p className="card-text">
-                  <strong>Gender:</strong> {props.gender}
-                </p>
-                <p className="card-text">
-                  <strong>Hair Color:</strong> {props.hair_color}
-                </p>
-                <p className="card-text">
-                  <strong>Eye Color:</strong> {props.eye_color}
-                </p>
+          <strong>Gender:</strong> {props.gender}
+        </p>
+        <p className="card-text">
+          <strong>Hair Color:</strong> {props.hair_color}
+        </p>
+        <p className="card-text">
+          <strong>Eye Color:</strong> {props.eye_color}
+        </p>
         <div className="d-flex justify-content-between">
           <button
             onClick={goToDetails}
@@ -61,7 +59,9 @@ export const CharactersCard = (props) => {
             style={{ backgroundColor: "#FF1493", color: "white" }}
           >
             <i
-              className={`fa-solid fa-heart ${isFavorite ? "text-danger" : "text-light"}`}
+              className={`fa-solid fa-heart ${
+                isFavorite ? "text-danger" : "text-light"
+              }`}
             />
           </button>
         </div>

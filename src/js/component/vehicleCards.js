@@ -6,8 +6,7 @@ export const VehiclesCard = (props) => {
   const { actions, store } = useContext(Context);
   const navigate = useNavigate();
 
-
-  const isFavorite = store.favorites.some(fav => fav.uid === props.uid);
+  const isFavorite = store.favorites.some((fav) => fav.uid === props.uid);
 
   // agrego o saco favs
   const activeFavorite = () => {
@@ -18,9 +17,8 @@ export const VehiclesCard = (props) => {
     }
   };
 
-
   const goToDetails = () => {
-    navigate(`/vehicles/${props.uid}`); 
+    navigate(`/vehicles/${props.uid}`);
   };
 
   return (
@@ -29,7 +27,6 @@ export const VehiclesCard = (props) => {
       style={{
         width: "18rem",
         backgroundColor: "#FFD1DC",
-        boxShadow: "5px 5px 5px 5px #8A2BE2",
       }}
     >
       <img
@@ -40,11 +37,11 @@ export const VehiclesCard = (props) => {
       <div className="card-body">
         <h5 className="card-title ">{props.name}</h5>
         <p className="card-text">
-                  <strong>Model:</strong> {props.model}
-                </p>
-                <p className="card-text">
-                  <strong>Passengers:</strong> {props.passengers}
-                </p>
+          <strong>Model:</strong> {props.model}
+        </p>
+        <p className="card-text">
+          <strong>Passengers:</strong> {props.passengers}
+        </p>
         <div className="d-flex justify-content-between">
           <button
             onClick={goToDetails}
